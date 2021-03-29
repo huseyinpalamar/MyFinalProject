@@ -11,8 +11,14 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //ProductTes();
+            ProductTes();
             //OrderTest();
+            //CategoryTest();
+
+        }
+
+        private static void CategoryTest()
+        {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
             foreach (var category in categoryManager.GetAll())
             {
@@ -34,11 +40,10 @@ namespace ConsoleUI
         {
             ProdcutManager prodcutManager = new ProdcutManager(new EfProductDal());
 
-            prodcutManager.Add(new Entities.Concrete.Product { ProductName = "asasdsa", CategoryId = 2, UnitPrice = 100, UnitsInStock = 40 });
-            prodcutManager.Delete(new Entities.Concrete.Product { ProductId = 78 });
-            foreach (var product in prodcutManager.GetAll())
+            
+            foreach (var product in prodcutManager.GetProductDetails())
             {
-                Console.WriteLine(product.ProductName + ":" + product.CategoryId);
+                Console.WriteLine(product.ProductName + "----------Kategori----" + product.CategoryName);
             }
         }
     }
