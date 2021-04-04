@@ -11,9 +11,12 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            ProductTes();
+            ProductTest();
             //OrderTest();
             //CategoryTest();
+
+          
+
 
         }
 
@@ -36,15 +39,24 @@ namespace ConsoleUI
             }
         }
 
-        private static void ProductTes()
+        private static void ProductTest()
         {
             ProdcutManager prodcutManager = new ProdcutManager(new EfProductDal());
 
-            
-            foreach (var product in prodcutManager.GetProductDetails())
+            var result = prodcutManager.GetProductDetails();
+            if (result.Success==true)
             {
-                Console.WriteLine(product.ProductName + "----------Kategori----" + product.CategoryName);
+                foreach (var product in result.Data)
+                {
+                    Console.WriteLine(product.ProductName + "----------Kategori----" + product.CategoryName);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
+           
         }
     }
 }
