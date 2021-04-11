@@ -44,8 +44,8 @@ namespace Business.Concrete
 
         public IDataResult<List<Product>> GetAll()
         {
-            // iş kodlarını buraya yazıcaz 
-            if (DateTime.Now.Hour==22)
+            //// iş kodlarını buraya yazıcaz 
+            if (DateTime.Now.Hour == 18)
             {
                 return new ErrorDataResult<List<Product>>(Messages.ProductListingFailed);
             }
