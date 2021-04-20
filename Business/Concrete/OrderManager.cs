@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class OrderManager : IOrderServices
+    public class OrderManager : IOrderService
     {
         IOrderDal _orderDal;
 
@@ -16,29 +17,32 @@ namespace Business.Concrete
             _orderDal = orderDal;
         }
 
-        public void Add(Order order)
+        public IResult Add(Order order)
         {
             _orderDal.Add(order);
+            return new SuccessResult();
         }
 
-        public void Delete(Order order)
+        public IResult Delete(Order order)
         {
             _orderDal.Delete(order);
+            return new SuccessResult();
         }
 
-        public List<Order> GetAll()
+        public IDataResult<List<Order>> GetAll()
         {
-           return  _orderDal.GetAll();
+            return new SuccessDataResult<List<Order>>(_orderDal.GetAll());
         }
 
-        public Order GetByOrderId(int id)
+        public IDataResult<Order> GetByOrderId(int orderId)
         {
-             return _orderDal.Get(o=>o.OrderId==id);
+            return new SuccessDataResult<Order>(_orderDal.Get(c => c.OrderId == orderId));
         }
 
-        public void Update(Order order)
+        public IResult Update(Order order)
         {
             _orderDal.Update(order);
+            return new SuccessResult();
         }
     }
 }
